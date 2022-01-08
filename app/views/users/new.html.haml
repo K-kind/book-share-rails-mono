@@ -1,0 +1,13 @@
+.mx-auto{:class => "w-6/12"}
+  %h1.font-bold.text-4xl 新規登録
+  = form_with model: @user, url: users_path, class: 'py-3' do |f|
+    .mb-2
+      = f.text_field :name, placeholder: 'ユーザー名', class: 'w-full'
+    .mb-2
+      = f.email_field :email, placeholder: 'メールアドレス', class: 'w-full'
+    .mb-2
+      = f.password_field :password, placeholder: 'パスワード', class: 'w-full'
+    .mb-2
+      = f.password_field :password_confirmation, placeholder: 'パスワード（確認）', class: 'w-full'
+    .flex.justify-center
+      = f.submit '新規登録', class: 'px-4 py-2 border hover:cursor-pointer'

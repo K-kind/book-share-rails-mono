@@ -10,5 +10,8 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
+    - flash.each do |name, msg|
+      = content_tag :div, msg, class: 'm-3 p-2 border rounded bg-sky-200 text-sky-700'
+
     %main.container.mx-auto.mt-28.px-5.flex
       = yield
