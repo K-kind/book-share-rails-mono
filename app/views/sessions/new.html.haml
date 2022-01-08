@@ -1,0 +1,18 @@
+.mx-auto{:class => "w-6/12"}
+  %h1.font-bold.text-4xl ログイン
+  = form_with scope: :sessions, url: login_path, class: 'py-3' do |f|
+    - if @error_message
+      %div.my-2.p-2.border.rounded.bg-red-300
+        %li.text-red-700= @error_message
+
+    .mb-2
+      = f.email_field :email, placeholder: 'メールアドレス', class: 'w-full'
+    .mb-2
+      = f.password_field :password, placeholder: 'パスワード', class: 'w-full'
+    .mb-2
+      = f.check_box :remember_me
+      = f.label :remember_me, 'ログイン状態を保持する'
+    .flex.justify-center
+      = f.submit 'ログイン', class: 'px-4 py-2 border hover:cursor-pointer'
+
+  = link_to '新規登録はこちら', new_users_path

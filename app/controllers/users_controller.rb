@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       flash[:notice] = '新規登録が完了しました'
       redirect_to root_url
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
