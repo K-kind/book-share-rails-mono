@@ -5,4 +5,6 @@ class Post < ApplicationRecord
 
   validates :content, presence: true, length: { maximum: 255 }
   validates :rate, numericality: { in: 1..5 }
+
+  RATES = [1, 2, 3, 4, 5]
 end

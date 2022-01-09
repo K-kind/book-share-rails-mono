@@ -1,0 +1,19 @@
+.mx-auto{:class => "w-6/12"}
+  %h1.font-bold.text-4xl 投稿を作成
+  = form_with model: @post, url: posts_path, class: 'py-3' do |f|
+    - if f.object.errors.any?
+      %ul.my-2.p-2.border.rounded.bg-red-300
+        - f.object.errors.full_messages.each do |message|
+          %li.text-red-700= message
+
+    .mb-2
+      = f.text_area :content, placeholder: '内容', class: 'w-full'
+    .mb-2
+      = f.label :rate, '評価: '
+      = f.select :rate, Post::RATES, selected: 5, class: 'w-full'
+    .mb-2
+      = f.label :image, '画像: '
+      = f.file_field :image
+
+    .flex.justify-center
+      = f.submit '投稿', class: 'px-4 py-2 border hover:cursor-pointer'
