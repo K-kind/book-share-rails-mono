@@ -1,2 +1,14 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+.mx-auto{:class => "w-6/12"}
+  %h1.font-bold.text-4xl.mb-8 投稿一覧
+  %div
+    - @posts.each do |post|
+      = link_to post_path(post) do
+        .mb-4.border.rounded.p-4
+          .mb-2 ユーザー: #{post.user.name}
+          - if post.image.attached?
+            .flex.justify-center.mb-2
+              = image_tag post.image
+          = simple_format post.content, class: 'mb-3'
+          .flex.justify-between
+            %div 評価: #{post.rate}
+            %div= l post.created_at
