@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def new
     @post = Post.new
   end
@@ -16,6 +20,13 @@ class PostsController < ApplicationController
   end
 
   def edit
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:notice] = '投稿を削除しました'
+    redirect_to root_url
   end
 
   private

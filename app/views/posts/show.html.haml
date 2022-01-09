@@ -1,0 +1,16 @@
+.mx-auto{:class => "w-6/12"}
+  %h1.font-bold.text-4xl.mb-8 投稿詳細
+  %div
+    .mb-4.border.rounded.p-4
+      .mb-2 ユーザー: #{@post.user.name}
+      - if @post.image.attached?
+        .flex.justify-center.mb-2
+          = image_tag @post.image
+      = simple_format @post.content, class: 'mb-3'
+      .flex.justify-between
+        %div 評価: #{@post.rate}
+        %div= l @post.created_at
+      - if @post.user == current_user
+        .flex.justify-end.gap-x-5.mt-3
+          = button_to '削除', post_path(@post), class: 'text-red-500', method: :delete, form: { data: { turbo_confirm: '削除しますか？' } }
+          = link_to '編集', edit_post_path(@post)
