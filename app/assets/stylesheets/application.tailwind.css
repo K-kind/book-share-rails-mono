@@ -11,3 +11,19 @@
 }
 
 */
+.pagination {
+  @apply flex gap-x-4;
+}
+
+.pagination > span {
+  @apply px-3 py-1;
+  @apply text-gray-700 bg-white border rounded-lg;
+}
+
+.pagination > span.current {
+  @apply text-gray-700 bg-blue-300 border rounded-lg;
+}
+
+.pagination > span:not(.current):hover {
+  @apply text-gray-200 bg-gray-700 cursor-pointer;
+}

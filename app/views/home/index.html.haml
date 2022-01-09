@@ -12,3 +12,5 @@
           .flex.justify-between
             %div 評価: #{post.rate}
             %div= l post.created_at
+
+    = paginate @posts
