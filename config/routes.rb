@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get    '/login',     to: 'sessions#new'
   post    '/login',     to: 'sessions#create'
   delete  '/logout',    to: 'sessions#destroy'
-  resource :users, only: %i[show new create]
-  resource :posts, only: %i[show new create edit update destroy]
+  resources :users, only: %i[show new create]
+  resources :posts, only: %i[show new create edit update destroy]
 end
