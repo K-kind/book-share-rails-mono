@@ -15,6 +15,7 @@
         %h1= link_to 'book share', root_path
         .flex.gap-x-7.items-center
           %span= link_to '新規投稿', new_post_path
+          %span= link_to 'ユーザー一覧', users_path
           = link_to mypage_path do
             %span.flex.gap-x-2.items-center
               = user_icon(current_user, 'small')

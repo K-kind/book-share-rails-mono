@@ -41,6 +41,15 @@ class UsersController < ApplicationController
       .order(created_at: :desc)
   end
 
+  def index
+    @users = User
+      .all
+      .with_attached_image
+      .page(params[:page])
+      .per(10)
+      .order(created_at: :asc)
+  end
+
   private
 
   def user_params

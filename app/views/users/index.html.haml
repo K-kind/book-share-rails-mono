@@ -1,0 +1,12 @@
+%div{:class => "mx-auto w-8/12"}
+  %h1.font-bold.text-4xl.mb-6 ユーザー一覧
+  %div
+    - @users.each do |user|
+      .border.rounded.p-4.mb-4
+        = link_to user_path(user) do
+          .mb-4.flex.gap-x-2.items-center
+            = user_icon(user, 'medium')
+            = user.name
+          = simple_format user.description, class: 'mb-4'
+
+    = paginate @users
