@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get       '/mypage',    to: 'users#me'
   resources :users, only: %i[index show new create update] do
     resource :relationship, only: %i[create destroy]
+    member do
+      get :following
+      get :followers
+    end
   end
   resources :posts, only: %i[show new create edit update destroy] do
     resource :like, only: %i[create destroy]

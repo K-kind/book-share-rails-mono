@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: [:me, :update]
+  before_action :require_login, only: [:me, :update, :following, :followers]
 
   def new
     @user = User.new
@@ -44,6 +44,26 @@ class UsersController < ApplicationController
   def index
     @users = User
       .all
+      .with_attached_image
+      .includes(:active_relationships, :passive_relationships)
+      .page(params[:page])
+      .per(10)
+      .order(created_at: :asc)
+  end
+
+  def following
+    @users = User.find(params[:id])
+      .following
+      .with_attached_image
+      .includes(:active_relationships, :passive_relationships)
+      .page(params[:page])
+      .per(10)
+      .order(created_at: :asc)
+  end
+
+  def followers
+    @users = User.find(params[:id])
+      .followers
       .with_attached_image
       .includes(:active_relationships, :passive_relationships)
       .page(params[:page])
