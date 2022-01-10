@@ -12,7 +12,15 @@
           = image_tag @post.image
       = simple_format @post.content, class: 'mb-3'
       .flex.justify-between
-        %div 評価: #{@post.rate}
+        .flex.gap-x-3
+          %span 評価: #{@post.rate}
+          %span.flex.gap-x-1
+          いいね: #{@post.likes_count}
+          - if @post.user != current_user
+            - if @post.is_liked_by?(current_user)
+              = button_to '-', post_like_path(@post), method: :delete
+            - else
+              = button_to '+', post_like_path(@post)
         %div= l @post.created_at
       - if @post.user == current_user
         .flex.justify-end.gap-x-5.mt-3
