@@ -1,5 +1,8 @@
-%div{:class => "mx-auto w-8/12"}
-  %h1.font-bold.text-4xl.mb-6 フォロワー一覧
+%div{:class => "w-4/12"}
+  = render partial: 'users/side_info', locals: { user: @user }
+
+%div{:class => "w-8/12"}
+  %h1.font-bold.text-4xl.mb-6 #{@user.name}のフォロワー一覧
   %div
     - @users.each do |user|
       = render partial: 'list_item', locals: { user: user }

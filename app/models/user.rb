@@ -54,6 +54,14 @@ class User < ApplicationRecord
     other_user.active_relationships.any? { |relationship| relationship.followed_id == id }
   end
 
+  def following_count
+    active_relationships.size
+  end
+
+  def followers_count
+    passive_relationships.size
+  end
+
   def follow(other_user)
     following << other_user
   end

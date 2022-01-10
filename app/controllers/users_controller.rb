@@ -52,7 +52,8 @@ class UsersController < ApplicationController
   end
 
   def following
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
+    @users = @user
       .following
       .with_attached_image
       .includes(:active_relationships, :passive_relationships)
@@ -62,7 +63,8 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
+    @users = @user
       .followers
       .with_attached_image
       .includes(:active_relationships, :passive_relationships)
