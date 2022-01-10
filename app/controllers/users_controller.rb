@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     @users = User
       .all
       .with_attached_image
+      .includes(:active_relationships, :passive_relationships)
       .page(params[:page])
       .per(10)
       .order(created_at: :asc)

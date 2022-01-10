@@ -3,3 +3,12 @@
     = user_icon(user, 'medium')
     = user.name
   = simple_format user.description, class: 'mb-4'
+  - if user != current_user
+    .flex.gap-x-4
+      - if current_user.following?(user)
+        = button_to 'フォローを解除', user_relationship_path(user), { method: :delete }
+      - else
+        = button_to 'フォローする', user_relationship_path(user)
+
+      - if current_user.followed_by?(user)
+        %span フォローされています

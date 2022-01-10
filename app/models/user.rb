@@ -45,4 +45,20 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  def following?(other_user)
+    other_user.passive_relationships.any? { |relationship| relationship.follower_id == id }
+  end
+
+  def followed_by?(other_user)
+    other_user.active_relationships.any? { |relationship| relationship.followed_id == id }
+  end
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow!(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy!
+  end
 end
