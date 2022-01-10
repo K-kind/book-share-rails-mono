@@ -1,4 +1,6 @@
 .mb-4.border.rounded.p-4
+  - if post.is_liked_by?(user)
+    .mb-4 #{user.name}がいいねした投稿
   = link_to user_path(post.user), class: 'block mb-2 hover:underline' do
     .flex.gap-x-2.items-center
       = user_icon(post.user, 'small')

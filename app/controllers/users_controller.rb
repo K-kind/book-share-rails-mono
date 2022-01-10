@@ -32,10 +32,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user
-      .posts
+    @posts = Post
       .includes(:likes, user: { image_attachment: :blob })
+      .left_joins(:likes)
+      .group('posts.id')
       .with_attached_image
+      .merge(Post.where(user: @user).or(Post.where(likes: { user: @user })))
       .page(params[:page])
       .per(10)
       .order(created_at: :desc)
