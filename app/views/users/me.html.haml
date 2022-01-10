@@ -1,0 +1,21 @@
+.mx-auto{:class => "w-6/12"}
+  %h1.font-bold.text-4xl マイページ
+  = form_with model: @user, class: 'py-3' do |f|
+    - if f.object.errors.any?
+      %ul.my-2.p-2.border.rounded.bg-red-300
+        - f.object.errors.full_messages.each do |message|
+          %li.text-red-700= message
+
+    .flex.justify-center.mb-4
+      = user_icon(@user, 'large')
+
+    .mb-6
+      = f.label :image, '画像: '
+      = f.file_field :image
+
+    .mb-3
+      = f.text_field :name, placeholder: 'ユーザー名', class: 'w-full'
+    .mb-3
+      = f.email_field :email, placeholder: 'メールアドレス', class: 'w-full'
+    .flex.justify-center
+      = f.submit '保存', class: 'px-4 py-2 border hover:cursor-pointer'

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   has_secure_password
+  has_one_attached :image
 
   attr_accessor :remember_token
 
@@ -9,7 +10,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  validates :password, presence: true, confirmation: true, length: { minimum: 6 }
+  validates :password, presence: true, confirmation: true, length: { minimum: 6 }, on: :create
 
   class << self
     def digest(string)

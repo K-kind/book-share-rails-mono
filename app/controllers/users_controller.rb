@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [:me, :update]
+
   def new
     @user = User.new
   end
@@ -14,11 +16,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def me
+    @user = User.find(current_user.id)
+  end
+
+  def update
+    @user = User.find(current_user.id)
+    if @user.update(user_update_params)
+      flash[:notice] = 'ユーザー情報の変更を保存しました'
+      redirect_to mypage_url
+    else
+      render :me, status: :unprocessable_entity
+    end
+  end
+
   def show; end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
+  end
+
+  def user_update_params
+    params.require(:user).permit(:name, :email, :image)
   end
 end
