@@ -17,5 +17,8 @@
       = f.text_field :name, placeholder: 'ユーザー名', class: 'w-full'
     .mb-3
       = f.email_field :email, placeholder: 'メールアドレス', class: 'w-full'
+    .mb-3
+      = f.text_area :description, placeholder: '自己紹介', class: 'w-full'
+
     .flex.justify-center
       = f.submit '保存', class: 'px-4 py-2 border hover:cursor-pointer'

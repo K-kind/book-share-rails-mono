@@ -2,3 +2,4 @@
   .mb-4.flex.gap-x-2.items-center
     = user_icon(user, 'medium')
     = user.name
+  = simple_format user.description, class: 'mb-4'
