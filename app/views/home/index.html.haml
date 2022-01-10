@@ -7,13 +7,21 @@
           .flex.gap-x-2.items-center
             = user_icon(post.user, 'small')
             = post.user.name
-        = link_to post_path(post) do
+        = link_to post_path(post), class: 'hover:underline' do
           - if post.image.attached?
             .flex.justify-center.mb-2
               = image_tag post.image
           = simple_format post.content, class: 'mb-3'
-          .flex.justify-between
-            %div 評価: #{post.rate}
-            %div= l post.created_at
+        .flex.justify-between
+          .flex.gap-x-3
+            %span 評価: #{post.rate}
+            %span.flex.gap-x-1
+              いいね: #{post.likes_count}
+              - if post.user != current_user
+                - if post.is_liked_by?(current_user)
+                  = button_to '-', post_like_path(post), method: :delete
+                - else
+                  = button_to '+', post_like_path(post)
+          %div= l post.created_at
 
     = paginate @posts
