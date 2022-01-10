@@ -1,3 +1,9 @@
-%div
-  %h1.font-bold.text-4xl Users#show
-  %p Find me in app/views/users/show.html.erb
+%div{:class => "w-4/12"}
+  = render partial: 'side_info', locals: { user: @user }
+
+%div{:class => "w-8/12"}
+  %div
+    - @posts.each do |post|
+      = render partial: 'posts/list_item', locals: { post: post }
+
+    = paginate @posts

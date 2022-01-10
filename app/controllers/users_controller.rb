@@ -30,7 +30,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+    @posts = @user
+      .posts
+      .includes(:likes, user: { image_attachment: :blob })
+      .with_attached_image
+      .page(params[:page])
+      .per(10)
+      .order(created_at: :desc)
+  end
 
   private
 
