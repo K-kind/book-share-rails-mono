@@ -11,11 +11,14 @@
     = javascript_importmap_tags
   %body
     - if logged_in?
-      .py-2.px-4.bg-indigo-200.flex.justify-between
+      .py-2.px-4.bg-indigo-200.flex.justify-between.items-center
         %h1= link_to 'book share', root_path
-        .flex.gap-x-5
+        .flex.gap-x-7.items-center
           %span= link_to '新規投稿', new_post_path
-          %span= link_to "ユーザー: #{current_user.name}", mypage_path
+          = link_to mypage_path do
+            %span.flex.gap-x-2.items-center
+              = user_icon(current_user, 'small')
+              = current_user.name
           %span= button_to 'ログアウト', logout_path, { method: :delete }
     - else
       .py-2.px-4.bg-indigo-200.flex.justify-between

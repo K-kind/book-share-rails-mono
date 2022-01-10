@@ -1,12 +1,12 @@
 module UsersHelper
   def user_icon(user, size = 'medium')
     image = user.image.attached? ? user.image : 'default-icon.png'
-    size_num =
+    class_name =
       case size
-      when 'small' then 10
-      when 'medium' then 12
-      when 'large' then 32
+      when 'small' then 'object-fill border rounded-full w-10 h-10'
+      when 'medium' then 'object-fill border rounded-full w-12 h-12'
+      when 'large' then 'object-fill border rounded-full w-32 h-32'
       end
-    image_tag image, class: "object-fill border rounded-full w-#{size_num} h-#{size_num}"
+    image_tag image, class: class_name
   end
 end
