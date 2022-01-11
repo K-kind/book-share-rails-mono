@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: [:me, :update, :following, :followers]
+  before_action :require_login, only: %i[me update following followers]
 
   def new
     @user = User.new
@@ -33,46 +33,46 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = Post
-      .includes(:likes, user: { image_attachment: :blob })
-      .left_joins(:likes)
-      .group('posts.id')
-      .with_attached_image
-      .merge(Post.where(user: @user).or(Post.where(likes: { user: @user })))
-      .page(params[:page])
-      .per(10)
-      .order(created_at: :desc)
+             .includes(:likes, user: { image_attachment: :blob })
+             .left_joins(:likes)
+             .group('posts.id')
+             .with_attached_image
+             .merge(Post.where(user: @user).or(Post.where(likes: { user: @user })))
+             .page(params[:page])
+             .per(10)
+             .order(created_at: :desc)
   end
 
   def index
     @users = User
-      .all
-      .with_attached_image
-      .includes(:active_relationships, :passive_relationships)
-      .page(params[:page])
-      .per(10)
-      .order(created_at: :asc)
+             .all
+             .with_attached_image
+             .includes(:active_relationships, :passive_relationships)
+             .page(params[:page])
+             .per(10)
+             .order(created_at: :asc)
   end
 
   def following
     @user = User.find(params[:id])
     @users = @user
-      .following
-      .with_attached_image
-      .includes(:active_relationships, :passive_relationships)
-      .page(params[:page])
-      .per(10)
-      .order(created_at: :asc)
+             .following
+             .with_attached_image
+             .includes(:active_relationships, :passive_relationships)
+             .page(params[:page])
+             .per(10)
+             .order(created_at: :asc)
   end
 
   def followers
     @user = User.find(params[:id])
     @users = @user
-      .followers
-      .with_attached_image
-      .includes(:active_relationships, :passive_relationships)
-      .page(params[:page])
-      .per(10)
-      .order(created_at: :asc)
+             .followers
+             .with_attached_image
+             .includes(:active_relationships, :passive_relationships)
+             .page(params[:page])
+             .per(10)
+             .order(created_at: :asc)
   end
 
   private

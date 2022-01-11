@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_login, only: %i[new create edit update destroy]
 
   def show
     @post = Post.find(params[:id])

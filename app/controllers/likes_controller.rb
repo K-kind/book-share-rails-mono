@@ -4,12 +4,9 @@ class LikesController < ApplicationController
   def create
     post = Post.find(params[:post_id])
     like = post.likes.new(user: current_user)
-    if like.save
-      redirect_back(fallback_location: root_path)
-    else
-      flash[:danger] = 'いいねに失敗しました'
-      redirect_back(fallback_location: root_path)
-    end
+
+    flash[:danger] = 'いいねに失敗しました' unless like.save
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
